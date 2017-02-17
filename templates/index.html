@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <script type="text/javascript" src="../static/js/index.js"></script>
+{% endblock %}
+
+{% block content %}
+    {% for blog in blogs %}
+        {% include "post.html" %}
+    {% endfor %}
+{% endblock %}

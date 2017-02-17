@@ -1,0 +1,68 @@
+<div class="card post" id="{{blog.id}}">
+    <div class="post-heading card-content">
+        <div class="post-title card-title">
+            {{blog.title}}
+        </div>
+
+        {% if blog.user == 1 %}
+            <i class="fa fa-ellipsis-v dropdown-button" data-activates="dropdown_{{blog.id}}"></i>
+            <ul id="dropdown_{{blog.id}}" class="dropdown-content">
+                <li><span class="editPost">Edit Post</span></li>
+                <li class="divider"></li>
+                <li><span class="deletePost">Delete Post</span></li>
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="card-content post-content">
+        {{blog.render_text | escape}}
+    </div>
+
+    <div class="post-review card-content">
+        <div class="statusBar">
+            <label class = "like">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                {% if blog.likeStatus == 0 %}
+                    <p>Like</p>
+                {% else %}
+                    <p>Liked</p>
+                {% endif %}
+            </label>
+            <label class = "comment">
+                <i class="fa fa-comment" aria-hidden="true"></i>
+                <p>Comment</p>
+            </label>
+        </div>
+
+        <div class="post-likes">
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            <span>{{ blog.likes | count }} Likes</span>
+        </div>
+
+        <div class="post-comments">
+            <div class="show-comments">
+                {% for comment in blog.comments %}
+                    <div class="comment" id = "{{comment.id}}">
+                        <p class="commentBy">{{comment.name}}</p>
+                        <p class="commentContent">{{comment.content}}</p>
+                        {% if blog.user == 1 or comment.userComment == 1 %}
+                            <i class="fa fa-times deleteComment" aria-hidden="true"></i>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="write-comment">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <input id="icon_comment" type="text" class="validate" name="comment" placeholder="Write a comment...">
+                    <label for="icon_comment">Comment</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-content post-creator">
+        <span class="postCreatedBy">{{blog.name}}</span>
+        <span class="postCreatedOn">{{blog.created.strftime("%b %d, %Y")}}</span>
+    </div>
+</div>

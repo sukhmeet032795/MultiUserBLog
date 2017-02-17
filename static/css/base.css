@@ -1,0 +1,227 @@
+/*************General Css***************/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    background-color: #3B5998;
+    height: 80px;
+}
+
+.headerImage {
+    margin-left: 42px;
+    display: flex;
+    align-items: center;
+}
+
+.headerImage img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.headerContent {
+    display: flex;
+}
+
+.headerContent span {
+    font-size: 20px;
+    color: #fff;
+    margin: auto 20px;
+}
+
+.headerContent .fa-angle-down {
+    margin: auto 20px auto 0px;
+    font-size: 22px;
+    color: #fff;
+}
+
+
+#loginLabel {
+    font-size: 20px;
+    color: #fff;
+    margin: auto 20px;
+}
+
+.fa-sign-in:before {
+    content: "\f090";
+    font-size: 22px;
+}
+
+#signupLabel {
+    font-size: 20px;
+    color: white;
+    margin: auto 40px auto 20px;
+}
+
+.fa-user-plus:before {
+    content: "\f234";
+    font-size: 22px;
+}
+
+#addBlog {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#addBlog i{
+    background-color: #3B5998;
+}
+/***************************************/
+
+/************Signup and Login***************/
+
+.formcontainer {
+    width: 40%;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.formLower {
+    display: flex;
+    justify-content: space-between;
+}
+
+.formLower #loginLabel {
+    color: #242424;
+    font-size: 18px;
+}
+
+.formLower #signupLabel {
+    color: #242424;
+    font-size: 18px;
+    margin-right: 0px;
+}
+
+.formLower button {
+    background-color: #242424;
+}
+
+/***************************************/
+
+/************NewBlog***************/
+
+.formBlog {
+    width: 50%;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+/***************************************/
+
+/************All blogs cards***************/
+
+.card {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.post-heading {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0px !important;
+}
+
+.post-heading .fa-ellipsis-v {
+    font-size: 22px;
+}
+
+.post-title {
+    margin-right: 30px;
+    font-weight: 400 !important;
+}
+
+.dropdown-content {
+    width: inherit !important;
+}
+
+.post-content {
+    font-size: 17px;
+}
+
+.post-review {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.statusBar {
+    display: flex;
+    width: 10%;
+    justify-content: space-between;
+}
+
+.statusBar label {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+}
+
+.statusBar .fa-heart, .statusBar .fa-comment {
+    font-size: 16px;
+    margin: auto 7px;
+    color: #242424;
+}
+
+.statusBar p {
+    margin: 0px;
+    font-size: 16px;
+    color: #242424 !important;
+}
+
+.post-likes {
+    margin-top: 10px;
+}
+
+.post-likes .fa-thumbs-up {
+    font-size: 16px;
+    margin: auto 7px;
+}
+
+.post-likes span {
+    font-size: 16px;
+}
+
+.show-comments {
+    margin-top: 20px;
+}
+
+.show-comments .comment {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.show-comments .commentBy {
+    font-size: 17px;
+    font-weight: 500;
+    width: 20%;
+}
+
+.show-comments .commentContent {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.show-comments .deleteComment {
+    margin:auto 0px auto auto;
+}
+
+.write-comment {
+    margin-top: 40px;
+}
+
+.write-comment label {
+    width: 100%;
+    line-height: 30px;
+    font-size: 16px;
+}
+
+.post-creator {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-creator .postCreatedBy, .post-creator .postCreatedOn{
+    font-size: 20px;
+}
+/***************************************/

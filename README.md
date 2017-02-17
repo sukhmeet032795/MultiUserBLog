@@ -10,7 +10,7 @@ It consist of the following folders:
 
 3) app.yaml : .Configuration of my App Engine application's settings
 
-4) Templates : the templates(html) are stored in this folder 
+4) Templates : the templates(html) are stored in this folder
 
 Running the Code Module
 
@@ -24,3 +24,7 @@ a) You would require python "json" library. It can be installed on linux based s
 
 sudo pip install simplejson // Python
 sudo pip3 install simplejson // Python3
+
+b) Running instance of the blog:
+
+http://udacitywork03.appspot.com/
