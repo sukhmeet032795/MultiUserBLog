@@ -199,7 +199,12 @@ class checkUser(BlogHandler):
 class Signup(BlogHandler):
 
     def get(self):
-        self.render("signup.html")
+        userId = self.getLoggedInUser()
+
+        if userId:
+            self.redirect("/wall")
+        else:
+            self.render("signup.html", user = 0)
 
     def post(self):
         fname = self.request.get("firstname")
@@ -253,7 +258,12 @@ class Signup(BlogHandler):
 class Login(BlogHandler):
 
     def get(self):
-        self.render("login.html")
+        userId = self.getLoggedInUser()
+
+        if userId:
+            self.redirect("/wall")
+        else:
+            self.render("login.html", user = 0)
 
     def post(self):
         username = self.request.get("username")
@@ -422,6 +432,52 @@ class UserWall(BlogHandler):
 
 class NewPost(BlogHandler):
 
+    def get(self):
+
+        userId = self.getLoggedInUser()
+        userObj = User.getUser(userId)
+
+        if not userObj:
+            self.redirect("/login")
+
+        p = { "user" : userObj}
+        self.render("newBlog.html", **p)
+
+    def post(self):
+
+        userId = self.getLoggedInUser()
+        userObj = User.getUser(userId)
+
+        title = self.request.get("title")
+        subject = self.request.get("subject")
+
+        p = { "title" : title, "subject" : subject, "user" : userObj }
+        error = False
+
+        if not title:
+            p["error_title"] = "Title Is Not Valid"
+            error = True
+
+        if not subject:
+            p["error_subject"] = "Subject Is Not Valid"
+            error = True
+
+        if error:
+            return self.render("newBlog.html", **p)
+        else:
+
+            if not userId:
+                return self.redirect("/login")
+
+            user = User.by_id(userId)
+
+            blog = Blog(title = title, subject = subject, created_by = user)
+            blog.put()
+
+            return self.redirect("/blog/" + str(blog.key().id()))
+
+class editBlog(BlogHandler):
+
     def get(self, blogId = None):
 
         userId = self.getLoggedInUser()
@@ -481,6 +537,9 @@ class showBlog(BlogHandler):
 
     def get(self, blogId):
         blog = Blog.getBlog(blogId)
+
+        if not blog:
+            return self.redirect("/wall")
 
         userId = self.getLoggedInUser()
         userObj = User.getUser(userId)
@@ -576,8 +635,22 @@ class likeBlog(BlogHandler):
 class commentBlog(BlogHandler):
 
     def post(self):
-        blogId = self.request.get("blogId")
         status = self.request.get("status")
+
+        if status == "updateComment":
+            id = self.request.get("id")
+            content = self.request.get("content")
+
+            comment = Comment.getComment(int(id))
+            comment.content = content
+            comment.put()
+
+            msg = "updated"
+            status = "success"
+            response = {"status": status, "msg": msg}
+            return self.write(json.dumps(response))
+
+        blogId = self.request.get("blogId")
 
         blog = Blog.getBlog(blogId)
         cookie_hash = self.get_cookie_hash("user")
@@ -679,7 +752,6 @@ class deleteBlog(BlogHandler):
 app = webapp2.WSGIApplication([("/", Home),
                                ("/wall", UserWall),
                                ("/newPost", NewPost),
-                               ("/newPost/(\d+)", NewPost),
                                ("/signup", Signup),
                                ("/login", Login),
                                ("/logout", Logout),
@@ -688,4 +760,5 @@ app = webapp2.WSGIApplication([("/", Home),
                                ("/commentBlog", commentBlog),
                                ("/deleteBlog", deleteBlog),
                                ("/checkUser", checkUser),
+                               ("/editBlog/(\d+)", editBlog),
                               ])
